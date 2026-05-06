@@ -30,7 +30,8 @@ public class Usuario {
 
     @Column(name = "data_atualizacao")
     private LocalDateTime dataAtualizacao;
-
+    // Controle de concorrência otimista: evita que atualizações simultâneas sobrescrevam dados
+    // O Hibernate incrementa automaticamente a cada update e lança erro se houver conflito
     @Version
     private Long version;
 
