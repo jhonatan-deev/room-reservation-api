@@ -24,8 +24,7 @@ public class ReservaService {
     public Reserva createReserva(Reserva reserva){
         reservaValidation.validar(reserva);
         conflitoReservaService.validarConflito(reserva);
-        Reserva novaReserva = reservaRepository.save(reserva);
-        return novaReserva;
+        return reservaRepository.save(reserva);
     }
 
     public void cancelReserva(Long reservaId){
