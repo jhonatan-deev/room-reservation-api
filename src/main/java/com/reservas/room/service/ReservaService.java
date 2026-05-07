@@ -1,5 +1,6 @@
 package com.reservas.room.service;
 
+import com.reservas.room.dto.reserva.ReservaResponseDTO;
 import com.reservas.room.enums.StatusReserva;
 import com.reservas.room.exception.ReservationNotFoundException;
 import com.reservas.room.model.Reserva;
