@@ -48,7 +48,7 @@ public class SalaService {
                 .toList();
     }
 
-    public SalaResponseDTO getSala(Long id) {
+    public SalaResponseDTO buscarSala(Long id) {
         return salaMapper.toDTO(salaRepository.findById(id).orElseThrow(() -> new SalaNotFoundException("Sala não encontrada")));
     }
 
