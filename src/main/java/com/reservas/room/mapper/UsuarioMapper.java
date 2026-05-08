@@ -26,7 +26,7 @@ public class UsuarioMapper {
         );
     }
 
-    public void updateEntity(Usuario usuario, UsuarioUpdateDTO dto){
+    public void updateEntity(UsuarioUpdateDTO dto, Usuario usuario){
         if(dto.nome() != null){
             usuario.setNome(dto.nome());
         }
