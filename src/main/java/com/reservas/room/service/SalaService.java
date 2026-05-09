@@ -21,13 +21,13 @@ public class SalaService {
         this.salaMapper = salaMapper;
     }
 
-    public SalaResponseDTO createSala(SalaRequestDTO salaRequestDTO){
+    public SalaResponseDTO createRoom(SalaRequestDTO salaRequestDTO){
         Sala sala = salaMapper.toEntity(salaRequestDTO);
         sala = salaRepository.save(sala);
         return salaMapper.toDTO(sala);
     }
 
-    public SalaResponseDTO updateSala(SalaUpdateDTO salaUpdateDTO, Long id){
+    public SalaResponseDTO updateRoom(SalaUpdateDTO salaUpdateDTO, Long id){
         Sala sala = salaRepository.findById(id).orElseThrow(
                 () -> new SalaNotFoundException("Sala inexistente"));
         salaMapper.updateEntity(salaUpdateDTO, sala);
@@ -35,20 +35,20 @@ public class SalaService {
         return salaMapper.toDTO(sala);
     }
 
-    public void deleteSala(Long id) {
+    public void deleteRoom(Long id) {
         Sala sala = salaRepository.findById(id).orElseThrow(
                 () -> new SalaNotFoundException("Sala inexistente")
         );
         salaRepository.delete(sala);
     }
 
-    public List<SalaResponseDTO> getSalas(){
+    public List<SalaResponseDTO> getAllRooms(){
         return salaRepository.findAll().stream()
                 .map(salaMapper::toDTO)
                 .toList();
     }
 
-    public SalaResponseDTO getSalaById(Long id) {
+    public SalaResponseDTO getRoomById(Long id) {
         return salaMapper.toDTO(salaRepository.findById(id).orElseThrow(() -> new SalaNotFoundException("Sala não encontrada")));
     }
 
