@@ -26,7 +26,7 @@ public class ReservaService {
         this.reservaMapper = reservaMapper;
     }
 
-    public ReservaResponseDTO createReserva(ReservaRequestDTO reservaRequestDTO){
+    public ReservaResponseDTO createReserve(ReservaRequestDTO reservaRequestDTO){
         Reserva reserva = reservaMapper.toEntity(reservaRequestDTO);
         reservaValidation.validar(reserva);
         conflitoReservaService.validarConflito(reserva);
@@ -34,7 +34,7 @@ public class ReservaService {
         return reservaMapper.toDTO(reserva);
     }
 
-    public ReservaResponseDTO cancelReserva(Long id){
+    public ReservaResponseDTO cancelReserve(Long id){
         Reserva reserva = reservaRepository.findById(id)
                 .orElseThrow(() -> new ReservationNotFoundException("Reservation not found with id: " + id));
         reserva.setStatusReserva(StatusReserva.CANCELADA);
@@ -43,7 +43,7 @@ public class ReservaService {
         return reservaMapper.toDTO(reserva);
     }
 
-    public ReservaResponseDTO buscarReserva(Long id){
+    public ReservaResponseDTO getReserve(Long id){
         return reservaMapper.toDTO(
                 reservaRepository.findById(id) .orElseThrow(() -> new ReservationNotFoundException("Reservation not found with id: " + id))
         );
