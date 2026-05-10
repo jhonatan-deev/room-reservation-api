@@ -8,6 +8,7 @@ import com.reservas.room.mapper.ReservaMapper;
 import com.reservas.room.model.Reserva;
 import com.reservas.room.respository.ReservaRepository;
 import com.reservas.room.validation.ReservaValidation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -25,7 +26,7 @@ public class ReservaService {
         this.conflitoReservaService = conflitoReservaService;
         this.reservaMapper = reservaMapper;
     }
-
+    @Transactional
     public ReservaResponseDTO createReserve(ReservaRequestDTO reservaRequestDTO){
         Reserva reserva = reservaMapper.toEntity(reservaRequestDTO);
         reservaValidation.validar(reserva);
@@ -33,7 +34,7 @@ public class ReservaService {
         reserva = reservaRepository.save(reserva);
         return reservaMapper.toDTO(reserva);
     }
-
+    @Transactional
     public ReservaResponseDTO cancelReserve(Long id){
         Reserva reserva = reservaRepository.findById(id)
                 .orElseThrow(() -> new ReservationNotFoundException("Reservation not found with id: " + id));

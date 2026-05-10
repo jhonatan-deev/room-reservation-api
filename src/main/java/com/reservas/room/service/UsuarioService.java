@@ -7,6 +7,7 @@ import com.reservas.room.exception.UserNotFoundException;
 import com.reservas.room.mapper.UsuarioMapper;
 import com.reservas.room.model.Usuario;
 import com.reservas.room.respository.UsuarioRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,20 +21,20 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
         this.usuarioMapper = usuarioMapper;
     }
-
+    @Transactional
     public UsuarioResponseDTO createUser(UsuarioRequestDTO usuarioRequestDTO){
         Usuario usuario = usuarioMapper.toEntity(usuarioRequestDTO);
         usuario = usuarioRepository.save(usuario);
         return usuarioMapper.toDTO(usuario);
     }
-
+    @Transactional
     public UsuarioResponseDTO updateUser(UsuarioUpdateDTO usuarioUpdateDTO, Long id){
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
         usuarioMapper.updateEntity(usuarioUpdateDTO, usuario);
         usuarioRepository.save(usuario);
         return usuarioMapper.toDTO(usuario);
     }
-
+    @Transactional
     public void deleteUserById(Long id){
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
         usuarioRepository.delete(usuario);

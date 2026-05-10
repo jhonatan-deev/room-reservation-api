@@ -7,6 +7,7 @@ import com.reservas.room.exception.SalaNotFoundException;
 import com.reservas.room.mapper.SalaMapper;
 import com.reservas.room.model.Sala;
 import com.reservas.room.respository.SalaRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,13 +21,13 @@ public class SalaService {
         this.salaRepository = salaRepository;
         this.salaMapper = salaMapper;
     }
-
+    @Transactional
     public SalaResponseDTO createRoom(SalaRequestDTO salaRequestDTO){
         Sala sala = salaMapper.toEntity(salaRequestDTO);
         sala = salaRepository.save(sala);
         return salaMapper.toDTO(sala);
     }
-
+    @Transactional
     public SalaResponseDTO updateRoom(SalaUpdateDTO salaUpdateDTO, Long id){
         Sala sala = salaRepository.findById(id).orElseThrow(
                 () -> new SalaNotFoundException("Sala inexistente"));
@@ -34,7 +35,7 @@ public class SalaService {
         sala = salaRepository.save(sala);
         return salaMapper.toDTO(sala);
     }
-
+    @Transactional
     public void deleteRoom(Long id) {
         Sala sala = salaRepository.findById(id).orElseThrow(
                 () -> new SalaNotFoundException("Sala inexistente")
