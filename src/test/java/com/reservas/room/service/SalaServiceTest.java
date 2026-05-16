@@ -140,7 +140,7 @@ class SalaServiceTest {
     }
 
     @Test
-    void deveLancarSalaNotFoundExceptionAoDeletarSalaComIdInexistente(){
+    void deveLancarSalaNotFoundExceptionAoTentarDeletarSalaComIdInexistente(){
         //ARRANGE
         Long idInexistente  = 1L;
         BDDMockito.given(salaRepository.findById(idInexistente)).willReturn(Optional.empty());
