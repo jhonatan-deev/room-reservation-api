@@ -98,4 +98,8 @@ public class Usuario {
     protected void onUpdate() {
         this.dataAtualizacao = LocalDateTime.now();
     }
+
+    public void setId(long l) {
+        this.id = l;
+    }
 }

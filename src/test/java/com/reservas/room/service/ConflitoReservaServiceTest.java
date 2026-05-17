@@ -1,12 +1,10 @@
 package com.reservas.room.service;
 
 import com.reservas.room.exception.ConflitoReservaException;
-import com.reservas.room.exception.SalaNotFoundException;
 import com.reservas.room.model.Reserva;
 import com.reservas.room.model.Sala;
 import com.reservas.room.model.Usuario;
 import com.reservas.room.respository.ReservaRepository;
-import com.reservas.room.validation.ReservaValidation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
