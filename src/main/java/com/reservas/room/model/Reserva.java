@@ -138,4 +138,8 @@ public class Reserva {
     protected void onUpdate() {
         this.dataAtualizacao = LocalDateTime.now();
     }
+
+    public void setId(long l) {
+        this.id = l;
+    }
 }

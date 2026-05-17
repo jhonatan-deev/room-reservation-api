@@ -2,11 +2,8 @@ package com.reservas.room.service;
 
 import com.reservas.room.exception.ConflitoReservaException;
 import com.reservas.room.model.Reserva;
-import com.reservas.room.model.Sala;
 import com.reservas.room.respository.ReservaRepository;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
