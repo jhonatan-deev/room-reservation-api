@@ -37,6 +37,7 @@ class SalaServiceTest {
 
     @Test
     void deveCriarSalaComSucesso() {
+        //ARRANGE
         SalaRequestDTO dto = new SalaRequestDTO("Sala A", 2);
         Sala salaSalva = new Sala("Sala A", 2);
         salaSalva.setId(1L);
@@ -45,36 +46,45 @@ class SalaServiceTest {
         BDDMockito.given(salaMapper.toEntity(dto)).willReturn(salaSalva);
         BDDMockito.given(salaRepository.save(salaSalva)).willReturn(salaSalva);
         BDDMockito.given(salaMapper.toDTO(salaSalva)).willReturn(responseDTO);
+        //ACT
         SalaResponseDTO resultado = salaService.createRoom(dto);
         Assertions.assertEquals(resultado.nome(), "Sala A");
         Assertions.assertEquals(resultado.capacidade(), 2);
         Assertions.assertEquals(resultado.id(), 1L);
+        //ASSERT
         BDDMockito.then(salaRepository).should().save(any(Sala.class));
     }
     @Test
     void deveBuscarSalaPorIdExistente(){
+        //ARRANGE
         Sala salaSalva = new Sala("Sala A", 2);
         salaSalva.setId(1L);
         SalaResponseDTO dto =  new SalaResponseDTO(1L, "Sala A", 2
                 , true, LocalDateTime.now());
         BDDMockito.given(salaRepository.findById(1L)).willReturn(Optional.of(salaSalva));
         BDDMockito.given(salaMapper.toDTO(salaSalva)).willReturn(dto);
+        //ACT
         SalaResponseDTO salaBuscada = salaService.getRoomById(1L);
         Assertions.assertEquals(salaBuscada.nome(), "Sala A");
         Assertions.assertEquals(salaBuscada.capacidade(), 2);
         Assertions.assertEquals(salaBuscada.id(), 1L);
+        //ASSERT
         BDDMockito.then(salaRepository).should().findById(1L);
     }
 
     @Test
     void deveRetornarListaVaziaQuandoNaoExistiremSalas(){
+        //ARRANGE
         BDDMockito.given(salaRepository.findAll()).willReturn(Collections.emptyList());
+        //ACT
         List<SalaResponseDTO> listaVazia = salaService.getAllRooms();
+        //ASSERT
         Assertions.assertEquals(listaVazia.size(), 0);
         BDDMockito.then(salaRepository).should().findAll();
     }
     @Test
     void deveRetornarListaDeSalasQuandoExistiremRegistros() {
+        //ARRANGE
         Sala sala1 = new Sala("Sala A", 2);
         sala1.setId(1L);
         Sala sala2 = new Sala("Sala B", 2);
@@ -84,7 +94,9 @@ class SalaServiceTest {
         SalaResponseDTO respostaSal2 = new SalaResponseDTO(2L, "Sala B", 2 ,true, LocalDateTime.now());
         BDDMockito.given(salaMapper.toDTO(sala1)).willReturn(respostaSal1);
         BDDMockito.given(salaMapper.toDTO(sala2)).willReturn(respostaSal2);
+        //ACT
         List<SalaResponseDTO> listarSalas = salaService.getAllRooms();
+        //ASSERT
         Assertions.assertEquals(listarSalas.size(), 2);
         Assertions.assertEquals(listarSalas.get(0).nome(), "Sala A");
         Assertions.assertEquals(listarSalas.get(1).nome(), "Sala B");

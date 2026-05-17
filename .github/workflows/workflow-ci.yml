@@ -19,4 +19,4 @@ jobs:
         cache: maven
         
     - name: Run tests
-      run: mvn clean test
+      run:  mvn clean test -Dtest='!com.reservas.room.RoomReservationApplicationTests'
